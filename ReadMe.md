@@ -7,18 +7,16 @@ This is a boilerplate for NodeJS project running on express
 Clone the project and run the following commands
 
 
-Installing dependencies 
+**Installing dependencies**
 
     $ npm install
     
-Starting the server
+**Starting the server**
 
     $ npm start
     
     
 The server listen on port ```3000``` by default. 
-
-
 
 ## About the structure
 
@@ -54,3 +52,28 @@ Each resource in component should have only exactly **3** ``js`` files. ```contr
 
 
 
+
+## Testing 
+
+Testing frameworks used here is mocha and chai. 
+
+
+
+Tests are to be written in ```tests/``` directory.
+
+```functions``` should be used to test functions (i.e. any services)
+
+Tests file should be named <component-under-test>-test.js
+
+
+```dummies``` should be used to put dummy data (sample booking, mock API response, etc)
+
+```rest``` should be used to put tests to endpoint testing
+
+
+**Running Tests**
+
+    $ npm test
+    
+    
+    
