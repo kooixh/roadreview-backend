@@ -5,8 +5,8 @@
  *
  */
 
-let redis = require('redis');
-let config = require('config');
+const redis = require('redis');
+const config = require('config');
 
 let redisDB = redis.createClient({
     db: config.redis.dbID,

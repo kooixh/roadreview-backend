@@ -30,6 +30,6 @@ function handleError(app) {
             'message': 'Internal Server Error'
         });
     });
-};
+}
 
 module.exports = handleError;

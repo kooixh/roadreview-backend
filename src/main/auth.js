@@ -16,8 +16,9 @@
  * @param app
  */
 function setupAuth(app) {
+    return app;
     //do stuff with app
-};
+}
 
 
 

@@ -7,8 +7,8 @@
 'use strict';
 
 
-let express = require('express');
-let router = express.Router();
+const express = require('express');
+const router = express.Router();
 
 let ctrl = require('./controller');
 router.get('/:uid', ctrl.getUser);

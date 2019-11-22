@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
-    "test": "mocha ./tests/ --recursive --exit"
+    "test": "mocha ./tests/ --recursive --exit",
+    "lint": "node_modules/eslint/bin/eslint.js ."
   },
   "dependencies": {
     "@google-cloud/datastore": "^4.1.3",

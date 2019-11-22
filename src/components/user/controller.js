@@ -5,9 +5,9 @@
  */
 "use strict";
 
+const _ = require('lodash');
+const userSrv = require('./service');
 
-let userSrv = require('./service');
-let _ = require('lodash');
 
 
 /**
@@ -20,6 +20,9 @@ let _ = require('lodash');
  * @param next
  */
 function getUser(req, res, next) {
+
+    if (!req.params.hasOwnProperty('uid'))
+        return next(new Error('missing params'));
 
     let user = userSrv.getUserByNumber(req.params.uid);
 
@@ -36,11 +39,7 @@ function getUser(req, res, next) {
     });
 }
 
-function throwError(req, res, next) {
-    throw new Error('Test error');
-}
 
 module.exports = {
     getUser,
-    throwError
 };

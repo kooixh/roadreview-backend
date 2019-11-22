@@ -51,6 +51,11 @@ tests
 Each resource in component should have only exactly **3** ``js`` files. ```controller.js```, ```routes.js```, ```service.js```
 
 
+### Linting 
+
+```npm run lint```
+
+
 
 
 ## Testing 

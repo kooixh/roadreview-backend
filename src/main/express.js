@@ -6,12 +6,12 @@
 
 'use strict';
 
-let path = require('path');
-let cors = require('cors');
-let config = require('config');
-let logger = require('morgan');
-let express = require('express');
-let cookieParser = require('cookie-parser');
+const path = require('path');
+const cors = require('cors');
+const config = require('config');
+const logger = require('morgan');
+const express = require('express');
+const cookieParser = require('cookie-parser');
 
 
 let app = express();
