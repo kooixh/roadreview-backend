@@ -1,9 +1,7 @@
 stages:
   - install
-#  - decrypt
   - lint
   - test
-#  - quality gate
 
 Install:
   image: gcr.io/cloud-builders/npm:node-10.10.0
@@ -16,22 +14,6 @@ Install:
   only:
     refs:
       - merge_request
-
-#Decrypt:
-#  image: gcr.io/cloud-builders/gcloud
-#  stage: decrypt
-#  script:
-#    - echo $KMS_SERVICE_ACCOUNT > $CI_PIPELINE_ID.json
-#    - gcloud auth activate-service-account --key-file $CI_PIPELINE_ID.json
-#    - ./decrypt.sh
-#    - rm $CI_PIPELINE_ID.json
-#  artifacts:
-#    name: $CI_PIPELINE_IID
-#    paths:
-#      - config/
-#  only:
-#    refs:
-#      - merge_request
 
 Lint:
   image: node
@@ -59,18 +41,3 @@ Unit Test:
   only:
     refs:
       - merge_request
-
-#Sonarq Scan:
-#  image: gcr.io/airasia-gitlab/sonar-scanner:latest
-#  stage: quality gate
-#  script:
-#    - sonar-scanner -Dsonar.host.url=$SQ_DOMAIN -Dsonar.login=$SQ_AUTH_TOKEN -Dsonar.projectKey=$SQ_PROJECT_KEY
-#    - sleep 60
-#    - check_status=$(curl -s -u $SQ_AUTH_TOKEN:'' $SQ_DOMAIN/api/qualitygates/project_status?projectKey=$SQ_PROJECT_KEY | jq -r '.projectStatus.status')
-#    - if [[ $check_status == 'OK' ]]; then echo "SONARQ GATEWAY PASSED"; else echo "SONARQ GATEWAY FAILED";exit 1; fi
-#  dependencies:
-#    - Unit Test
-#  allow_failure: true
-#  only:
-#    refs:
-#      - merge_request

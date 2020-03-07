@@ -8,6 +8,14 @@ module.exports = {
         port: process.env.REDIS_PORT || "6379",
         dbID: process.env.REDIS_DB_ID || "0",
         password: process.env.REDIS_PASSWORD || "1234567890"
+    },
+
+    db: {
+        host: 'localhost',
+        user: 'root',
+        password: 'root12345',
+        database: 'road_review_test',
+        dialect: 'mysql'
     }
 
 };

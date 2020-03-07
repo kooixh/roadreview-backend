@@ -1,13 +1,7 @@
-/**
- *
- * This file exports a function that sets up route to the app
- *
- */
-
 'use strict';
 
 const root = require('../components/root/routes');
-const userRoutes = require('../components/user/routes');
+const carplateRoutes = require('../components/carplate/carplate.routes');
 
 
 /**
@@ -19,11 +13,10 @@ const userRoutes = require('../components/user/routes');
  */
 function setupRoutes(app) {
     app.use('/', root);
-    app.use('/user', userRoutes);
+    app.use('/carplate', carplateRoutes);
     app.all('/*', function (req, res) {
         return res.status(404).json({message: 'Cannot find specified URL'});
     });
 }
-
 
 module.exports = setupRoutes;

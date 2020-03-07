@@ -2,7 +2,7 @@
 global.mocha = require('mocha');
 
 let expect = require('chai').expect;
-let userSrv = require('../../src/components/user/service');
+let userSrv = require('../../src/components/user/user.service');
 
 
 

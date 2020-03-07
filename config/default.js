@@ -2,10 +2,10 @@
 module.exports = {
 
     PORT: 3000,
-    SERVER_NAME: 'node-js:server',
+    SERVER_NAME: 'road-review:server',
 
 
-    name: 'node-js-boilerplate',
+    name: 'road-review',
     version: '1.0',
 
     env: process.env.NODE_ENV || 'development',
@@ -15,6 +15,14 @@ module.exports = {
         port: process.env.REDIS_PORT,
         dbID: process.env.REDIS_DB_ID,
         password: process.env.REDIS_PASSWORD
+    },
+
+    db: {
+        host: process.env.DB_HOST,
+        user: process.env.DB_USER,
+        password: process.env.DB_PASSWORD,
+        database: process.env.DB_NAME,
+        dialect: 'mysql'
     }
 
 };
