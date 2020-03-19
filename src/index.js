@@ -17,8 +17,6 @@ const cache = require('./utils/cache');
 const errors = require('./main/errors');
 const db = require('./utils/database');
 
-const {Review, Carplate} = require('./components/carplate/carplate.model');
-
 
 /**
  *
@@ -32,14 +30,7 @@ function setupApp() {
     errors(app);
     cache.init();
     db.authenticate().then(() => {
-        db.sync().then(() => {
-            Carplate.findOne({where: {id: 11}}).then((plate) => {
-                Review.create({content: 'some text'}).then((rev) => {
-                    rev.setCarplate(plate);
-                });
-            })
-
-        });
+        logger.log
     });
 
 
