@@ -10,10 +10,10 @@ const _ = require('lodash');
 const TYPE_UPVOTE = "upvote";
 const TYPE_DOWNVOTE = "upvote";
 
-async function createCarplate(data) {
-    let state = getStateByCarplate(data.plate_number);
+async function createCarplate(plateNumber) {
+    let state = getStateByCarplate(plateNumber);
     await Carplate.create({
-        plate_number: data.plate_number,
+        plate_number: plateNumber,
         state: state,
         upvotes: 0,
         downvotes: 0
@@ -29,13 +29,11 @@ async function createReview(data, carplate) {
     return review;
 }
 
-async function postReview(data) {
+async function postReview(data, plateNumber) {
     return new Promise(async (resolve, reject) => {
-        let carplate = await findCarplateByNumber(data.plate_number);
+        let carplate = await findCarplateByNumber(plateNumber);
         if (_.isEmpty(carplate)) {
-            carplate = createCarplate({
-                plate_number: data.plate_number
-            });
+            carplate = createCarplate(plateNumber);
         }
         applyVote(carplate, data);
         await createReview(data, carplate)
@@ -60,8 +58,10 @@ async function findCarplateByNumber(plateNumber) {
     });
 }
 
-
-
 function getStateByCarplate(plateNumber) {
     return '';
 }
+
+module.exports = {
+    postReview: postReview
+};
