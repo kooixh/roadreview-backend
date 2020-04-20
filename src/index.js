@@ -6,8 +6,8 @@
 
 const config = require('config');
 const app = require('./main/express');
-const routes = require('./main/router');
-const auth = require('./main/auth');
+const registerRoutes = require('./main/router');
+const setupAuth = require('./main/auth');
 const logger = require('./utils/logger');
 const cache = require('./utils/cache');
 const errors = require('./main/errors');
@@ -16,13 +16,12 @@ const db = require('./utils/database');
 
 /**
  *
- * This function sets up the routes, auth and start the cache for the server
+ * This function sets up the registerRoutes, setupAuth and start the cache for the server
  *
  */
 function setupApp() {
-
-    routes(app);
-    auth(app);
+    registerRoutes(app);
+    setupAuth(app);
     errors(app);
     cache.init();
     db.authenticate().then(() => {});

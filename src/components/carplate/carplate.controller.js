@@ -1,6 +1,6 @@
 /**
  *
- * This file is the controller for the user component. /user
+ * This file is the controller for the user component. /carplate
  *
  */
 "use strict";

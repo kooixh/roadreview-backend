@@ -38,7 +38,6 @@ function init() {
     }
 }
 
-
 module.exports = {
     init: init,
     redisDB: redisDB

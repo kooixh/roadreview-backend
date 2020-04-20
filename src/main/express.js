@@ -30,7 +30,8 @@ app.use(express.static(path.join(__dirname, '../public')));
 app.use(cors({
     origin: config.allowedURLs,
     methods: ['GET', 'PUT', 'POST', 'DELETE'],
-    allowedHeaders: ['X-Requested-With', 'X-File-Name', 'Content-Type', 'Authorization', 'Location', 'Language', 'Device-ID', 'Timestamp', 'Key', 'Encrypted-Content-Type'],
+    allowedHeaders: ['X-Requested-With', 'X-File-Name', 'Content-Type', 'Authorization', 'Location', 'Language',
+        'Device-ID', 'Timestamp', 'Key', 'Encrypted-Content-Type'],
     exposedHeaders: ['File-Type', 'File-Length', 'Content-Type', 'Content-Length', 'Last-Modified', 'Last-Created']
 }));
 
