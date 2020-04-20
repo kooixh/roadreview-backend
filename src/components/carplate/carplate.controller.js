@@ -5,7 +5,6 @@
  */
 "use strict";
 
-const _ = require('lodash');
 const error = require('http-errors');
 const carplateService = require('./carplate.service');
 const POST_REVIEW_PAYLOAD = ["content", "reviewerIp", "type"];

@@ -1,12 +1,8 @@
 /**
  *
- *
  * This file exports function to run the server
  */
-
-
 'use strict';
-
 
 const config = require('config');
 const app = require('./main/express');
@@ -29,12 +25,7 @@ function setupApp() {
     auth(app);
     errors(app);
     cache.init();
-    db.authenticate().then(() => {
-        logger.log
-    });
-
-
-
+    db.authenticate().then(() => {});
 }
 
 
