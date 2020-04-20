@@ -32,10 +32,8 @@ async function getPlateReview(req, res) {
 
 async function postReview(req, res, next) {
     if (!validatePayload(req.body)) {
-        console.log("invalid");
         throw next(error(400, 'payload contains invalid values'));
     }
-
     await carplateService.postReview(req.body, req.params.plateNumber);
 
     return res.status(201).json({
@@ -46,7 +44,7 @@ async function postReview(req, res, next) {
 }
 
 function validatePayload(data) {
-    return !(_.isEmpty(data.content) || _.isEmpty(data.type) || _.isEmpty(data.reviewerIp));
+    return POST_REVIEW_PAYLOAD.every(item => data.hasOwnProperty(item));
 }
 
 module.exports = {
