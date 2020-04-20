@@ -25,9 +25,9 @@ function handleError(app) {
         if (!err)
             return next();
 
-        logger.log('Error: %s %O', err.message, err.stack);
-        res.status(500).send({
-            'message': 'Internal Server Error'
+        res.status(err.statusCode).send({
+            status: 'error',
+            message: err.message
         });
     });
 }
