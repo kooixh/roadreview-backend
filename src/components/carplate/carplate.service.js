@@ -5,10 +5,12 @@
  *
  */
 'use strict';
-const { Carplate, Review } = require('./carplate.model');
 const _ = require('lodash');
+
+const { Carplate, Review } = require('./carplate.model');
+const plateState = require('./plate_states');
 const TYPE_UPVOTE = "upvote";
-const TYPE_DOWNVOTE = "upvote";
+const TYPE_DOWNVOTE = "downvote";
 
 
 async function getPlateData(plateNumber) {
@@ -111,7 +113,11 @@ async function findReviewsForPlate(carplateId) {
 }
 
 function getStateByCarplate(plateNumber) {
-    return '';
+    let state = plateNumber.charAt(0);
+    if (plateState.hasOwnProperty(state)) {
+        return plateState[state];
+    }
+    return 'specia';
 }
 
 module.exports = {
