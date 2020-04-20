@@ -39,7 +39,7 @@ Review.init({
         type: Sequelize.TEXT,
         allowNull: false
     },
-    reviewerIp: {
+    reviewer_ip: {
         type: Sequelize.STRING,
         allowNull: true
     }

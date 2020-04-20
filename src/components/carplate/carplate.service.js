@@ -10,34 +10,49 @@ const _ = require('lodash');
 const TYPE_UPVOTE = "upvote";
 const TYPE_DOWNVOTE = "upvote";
 
-async function createCarplate(plateNumber) {
-    let state = getStateByCarplate(plateNumber);
-    await Carplate.create({
-        plate_number: plateNumber,
-        state: state,
-        upvotes: 0,
-        downvotes: 0
-    });
-}
 
-async function createReview(data, carplate) {
-    let review = await Review.create({
-       content: data.content,
-       reviewerIp: data.reviewerIp
+async function getPlateData(plateNumber) {
+    return new Promise(async (resolve, reject) => {
+        let plate = await findCarplateByNumber(plateNumber);
+
+        if (_.isEmpty(plate)) {
+            return reject({});
+        }
+
+        let reviews = await findReviewsForPlate(plate.id);
+
+        let reviewsResponse = [];
+
+        _.forEach(reviews, elem => {
+            let rev = {
+                id: elem.id,
+                content: elem.content,
+                reviewer_ip: elem.reviewer_ip,
+                createdAt: elem.createdAt
+            };
+            reviewsResponse.push(rev);
+        });
+
+        let responseData = {
+            plate_number: plate.plate_number,
+            state: plate.state,
+            upvotes: plate.upvotes,
+            downvotes: plate.downvotes,
+            reviews: reviewsResponse
+        };
+
+        return resolve(responseData);
     });
-    review.setCarplate(carplate);
-    return review;
 }
 
 async function postReview(data, plateNumber) {
-    return new Promise(async (resolve, reject) => {
-        let carplate = await findCarplateByNumber(plateNumber);
-        if (_.isEmpty(carplate)) {
-            carplate = createCarplate(plateNumber);
-        }
-        applyVote(carplate, data);
-        await createReview(data, carplate)
-    });
+    let carplate = await findCarplateByNumber(plateNumber);
+    if (_.isEmpty(carplate)) {
+        carplate = await createCarplate(plateNumber);
+    }
+    applyVote(carplate, data);
+    await carplate.save();
+    await createReview(data, carplate);
 }
 
 function applyVote(carplate, data) {
@@ -50,10 +65,47 @@ function applyVote(carplate, data) {
     }
 }
 
+async function createCarplate(plateNumber) {
+    return new Promise(async resolve => {
+        let state = getStateByCarplate(plateNumber);
+        let plate = await Carplate.create({
+            plate_number: plateNumber,
+            state: state,
+            upvotes: 0,
+            downvotes: 0
+        });
+
+        return resolve(plate);
+    });
+
+
+}
+
+async function createReview(data, carplate) {
+    let review = await Review.create({
+        content: data.content,
+        reviewer_ip: data.reviewerIp
+    });
+    await review.setCarplate(carplate);
+    return review;
+}
+
 async function findCarplateByNumber(plateNumber) {
-    return Carplate.findOne({
+
+    return new Promise(async resolve => {
+        let plate = await Carplate.findOne({
+            where: {
+                plate_number: plateNumber
+            }
+        });
+        return resolve(plate);
+    });
+}
+
+async function findReviewsForPlate(carplateId) {
+    return Review.findAll({
         where: {
-            plateNumber: plateNumber
+            carplateId: carplateId
         }
     });
 }
@@ -63,5 +115,6 @@ function getStateByCarplate(plateNumber) {
 }
 
 module.exports = {
-    postReview: postReview
+    postReview: postReview,
+    getPlateData: getPlateData
 };
