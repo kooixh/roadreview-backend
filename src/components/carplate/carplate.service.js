@@ -35,6 +35,7 @@ async function getPlateData(plateNumber) {
         });
 
         let responseData = {
+            id: plate.id,
             plate_number: plate.plate_number,
             state: plate.state,
             upvotes: plate.upvotes,
