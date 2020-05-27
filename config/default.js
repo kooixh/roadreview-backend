@@ -4,7 +4,6 @@ module.exports = {
     PORT: 3000,
     SERVER_NAME: 'road-review:server',
 
-
     name: 'road-review',
     version: '1.0',
 

@@ -93,7 +93,6 @@ async function createReview(data, carplate) {
 }
 
 async function findCarplateByNumber(plateNumber) {
-
     return new Promise(async resolve => {
         let plate = await Carplate.findOne({
             where: {
@@ -117,7 +116,7 @@ function getStateByCarplate(plateNumber) {
     if (plateState.hasOwnProperty(state)) {
         return plateState[state];
     }
-    return 'specia';
+    return 'special';
 }
 
 module.exports = {
