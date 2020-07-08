@@ -1,0 +1,93 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: road-review-deployment
+  namespace: road-review-namespace
+  labels:
+    app: road-review-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: road-review-backend
+  template:
+    metadata:
+      labels:
+        app: road-review-backend
+    spec:
+      containers:
+        - name: road-review-backend
+          image: road-review-backend:$VERSION_NUM
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 3000
+          resources:
+            limits:
+              cpu: 1
+              memory: "1Gi"
+            requests:
+              cpu: 0.5
+              memory: "500Mi"
+          envFrom:
+            - configMapRef:
+                name: road-review-configmap
+          env:
+            - name: REDIS_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: redis-pass
+                  key: password
+            - name: REDIS_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: redis-host
+                  key: host
+            - name: REDIS_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: redis-host
+                  key: port
+            - name: REDIS_DB_ID
+              valueFrom:
+                secretKeyRef:
+                  name: redis-host
+                  key: db-id
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: mysql
+                  key: mysql-user-name
+            - name: DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: mysql
+                  key: mysql-host
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: mysql
+                  key: mysql-password
+            - name: DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: mysql
+                  key: mysql-db-name
+          restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: road-review-backend
+  labels:
+    app: road-review-backend
+spec:
+  type: NodePort
+  selector:
+    app: road-review-backend
+  ports:
+    - name: http
+      port: 3000
+      targetPort: 3000
+      protocol: TCP

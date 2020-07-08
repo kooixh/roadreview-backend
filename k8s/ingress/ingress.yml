@@ -1,0 +1,13 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: road-review-ingress
+  annotations:
+    kubernetes.io/ingress.global-static-ip-name: "road-review-static-ip"
+    kubernetes.io/ingress.allow-http: "false
+spec:
+  backend:
+    serviceName: road-review-backend
+    servicePort: 3000
+tls:
+  - secretName: road-review-tls-cert

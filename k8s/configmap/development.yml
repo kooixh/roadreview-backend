@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: road-review-configmap
+  namespace: road-review-namespace
+data:
+  NODE_ENV: development
