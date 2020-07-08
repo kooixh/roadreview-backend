@@ -5,14 +5,13 @@
 'use strict';
 
 const config = require('config');
-const app = require('./main/express');
-const registerRoutes = require('./main/router');
-const setupAuth = require('./main/auth');
-const logger = require('./utils/logger');
-const cache = require('./utils/cache');
-const errors = require('./main/errors');
-const db = require('./utils/database');
-
+const app = require('./server/express');
+const registerRoutes = require('./server/router');
+const setupAuth = require('./server/middlewares/auth');
+const logger = require('./server/middlewares/logger');
+const cache = require('./common/clients/cache');
+const errors = require('./server/errors');
+const db = require('./common/clients/database');
 
 /**
  *
@@ -33,7 +32,6 @@ function setupApp() {
  *
  * This function starts the server
  *
- *
  * @returns {http.Server}
  */
 function startApp() {
@@ -46,7 +44,6 @@ function startApp() {
         logger.log(`server started on port ${port}`);
     });
 }
-
 
 module.exports = {
     startApp

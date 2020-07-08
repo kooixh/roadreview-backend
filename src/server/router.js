@@ -1,7 +1,7 @@
 'use strict';
 
-const root = require('../components/root/routes');
-const carplateRoutes = require('../components/carplate/carplate.routes');
+const root = require('../api/root/routes');
+const carplateRoutes = require('../api/carplate/routes/carplate.routes');
 
 
 /**

@@ -1,10 +1,3 @@
-/**
- *
- * This file exports a function to setup auth middleware
- *
- *
- */
-
 'use strict';
 
 

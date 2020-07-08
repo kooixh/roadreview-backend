@@ -5,7 +5,7 @@
  */
 'use strict';
 const Sequelize = require('sequelize');
-const sequelize = require('../../utils/database');
+const sequelize = require('../../../common/clients/database');
 
 const Model = Sequelize.Model;
 class Carplate extends Model {}
@@ -49,6 +49,8 @@ Review.init({
 });
 Carplate.hasMany(Review);
 Review.belongsTo(Carplate);
+Carplate.sync();
+Review.sync();
 
 module.exports = {
     Review: Review,

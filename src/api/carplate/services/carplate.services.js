@@ -6,8 +6,8 @@
  */
 'use strict';
 const _ = require('lodash');
-const { Carplate, Review } = require('./carplate.model');
-const plateState = require('./plate_states');
+const { Carplate, Review } = require('../models/carplate.model');
+const plateState = require('../data/plate_states');
 const TYPE_UPVOTE = "upvote";
 const TYPE_DOWNVOTE = "downvote";
 

@@ -6,7 +6,7 @@
 "use strict";
 
 const error = require('http-errors');
-const carplateService = require('./carplate.service');
+const carplateService = require('../services/carplate.services');
 const POST_REVIEW_PAYLOAD = ["content", "reviewerIp", "type"];
 
 

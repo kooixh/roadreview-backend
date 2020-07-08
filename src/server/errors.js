@@ -1,12 +1,4 @@
-/**
- *
- * This file exports a function to set up error handler
- *
- */
-
 'use strict';
-
-
 
 /**
  *
@@ -19,7 +11,6 @@ function handleError(app) {
 
     // error handler
     app.use(function (err, req, res, next) {
-
         if (!err)
             return next();
 
