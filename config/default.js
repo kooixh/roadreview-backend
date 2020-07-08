@@ -1,5 +1,4 @@
 module.exports = {
-
     PORT: 3000,
     SERVER_NAME: 'road-review:server',
 
@@ -22,5 +21,4 @@ module.exports = {
         database: process.env.DB_NAME,
         dialect: 'mysql'
     }
-
 };

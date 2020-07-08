@@ -3,7 +3,6 @@
 const root = require('../api/root/routes');
 const carplateRoutes = require('../api/carplate/routes/carplate.routes');
 
-
 /**
  *
  * This function setup the routes for the app by assigning it all router
@@ -15,7 +14,7 @@ function setupRoutes(app) {
     app.use('/', root);
     app.use('/carplate', carplateRoutes);
     app.all('/*', function (req, res) {
-        return res.status(404).json({message: 'Cannot find specified URL'});
+        return res.status(404).json({ message: 'Cannot find specified URL' });
     });
 }
 

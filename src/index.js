@@ -26,7 +26,6 @@ function setupApp() {
     db.authenticate().then(() => {});
 }
 
-
 /**
  *
  *
@@ -35,7 +34,6 @@ function setupApp() {
  * @returns {http.Server}
  */
 function startApp() {
-
     const port = config.PORT || 3000;
     setupApp();
 

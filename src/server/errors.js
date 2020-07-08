@@ -8,11 +8,9 @@
  * @param app
  */
 function handleError(app) {
-
     // error handler
     app.use(function (err, req, res, next) {
-        if (!err)
-            return next();
+        if (!err) return next();
 
         res.status(err.statusCode).send({
             status: 'error',

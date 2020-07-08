@@ -9,44 +9,50 @@ const sequelize = require('../../../common/clients/database');
 
 const Model = Sequelize.Model;
 class Carplate extends Model {}
-Carplate.init({
-    // attributes
-    plate_number: {
-        type: Sequelize.STRING,
-        allowNull: false
+Carplate.init(
+    {
+        // attributes
+        plate_number: {
+            type: Sequelize.STRING,
+            allowNull: false
+        },
+        state: {
+            type: Sequelize.STRING,
+            allowNull: false
+        },
+        upvotes: {
+            type: Sequelize.INTEGER,
+            allowNull: false
+        },
+        downvotes: {
+            type: Sequelize.INTEGER,
+            allowNull: false
+        }
     },
-    state: {
-        type: Sequelize.STRING,
-        allowNull: false
-    },
-    upvotes: {
-        type: Sequelize.INTEGER,
-        allowNull: false
-    },
-    downvotes: {
-        type: Sequelize.INTEGER,
-        allowNull: false
+    {
+        sequelize,
+        modelName: 'carplate'
     }
-}, {
-    sequelize,
-    modelName: 'carplate',
-});
+);
 
 class Review extends Model {}
-Review.init({
-    // attributes
-    content: {
-        type: Sequelize.TEXT,
-        allowNull: false
+Review.init(
+    {
+        // attributes
+        content: {
+            type: Sequelize.TEXT,
+            allowNull: false
+        },
+        reviewer_ip: {
+            type: Sequelize.STRING,
+            allowNull: true
+        }
     },
-    reviewer_ip: {
-        type: Sequelize.STRING,
-        allowNull: true
+    {
+        sequelize,
+        modelName: 'review'
     }
-}, {
-    sequelize,
-    modelName: 'review',
-});
+);
 Carplate.hasMany(Review);
 Review.belongsTo(Carplate);
 Carplate.sync();

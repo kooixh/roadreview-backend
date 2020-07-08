@@ -8,9 +8,8 @@
 const _ = require('lodash');
 const { Carplate, Review } = require('../models/carplate.model');
 const plateState = require('../data/plate_states');
-const TYPE_UPVOTE = "upvote";
-const TYPE_DOWNVOTE = "downvote";
-
+const TYPE_UPVOTE = 'upvote';
+const TYPE_DOWNVOTE = 'downvote';
 
 async function getPlateData(plateNumber) {
     return new Promise(async (resolve, reject) => {
@@ -24,7 +23,7 @@ async function getPlateData(plateNumber) {
 
         let reviewsResponse = [];
 
-        _.forEach(reviews, elem => {
+        _.forEach(reviews, (elem) => {
             let rev = {
                 id: elem.id,
                 content: elem.content,
@@ -63,12 +62,12 @@ function applyVote(carplate, data) {
     } else if (data.type === TYPE_DOWNVOTE) {
         carplate.downvotes = carplate.downvotes + 1;
     } else {
-        throw new Error("type does not contian a valid value");
+        throw new Error('type does not contian a valid value');
     }
 }
 
 async function createCarplate(plateNumber) {
-    return new Promise(async resolve => {
+    return new Promise(async (resolve) => {
         let state = getStateByCarplate(plateNumber);
         let plate = await Carplate.create({
             plate_number: plateNumber,
@@ -79,8 +78,6 @@ async function createCarplate(plateNumber) {
 
         return resolve(plate);
     });
-
-
 }
 
 async function createReview(data, carplate) {
@@ -93,7 +90,7 @@ async function createReview(data, carplate) {
 }
 
 async function findCarplateByNumber(plateNumber) {
-    return new Promise(async resolve => {
+    return new Promise(async (resolve) => {
         let plate = await Carplate.findOne({
             where: {
                 plate_number: plateNumber

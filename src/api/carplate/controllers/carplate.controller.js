@@ -3,17 +3,15 @@
  * This file is the controller for the user component. /carplate
  *
  */
-"use strict";
+'use strict';
 
 const error = require('http-errors');
 const carplateService = require('../services/carplate.services');
-const POST_REVIEW_PAYLOAD = ["content", "reviewerIp", "type"];
-
+const POST_REVIEW_PAYLOAD = ['content', 'reviewerIp', 'type'];
 
 async function getPlateReview(req, res) {
     let plateNo = req.params.plateNumber.toUpperCase();
     try {
-
         let response = await carplateService.getPlateData(plateNo);
         return res.status(200).json({
             status: 'success',
@@ -27,7 +25,6 @@ async function getPlateReview(req, res) {
             data: {}
         });
     }
-
 }
 
 async function postReview(req, res, next) {
@@ -38,14 +35,13 @@ async function postReview(req, res, next) {
     await carplateService.postReview(req.body, plateNo);
 
     return res.status(201).json({
-       status: 'success',
-       message: 'review successfully posted for carplate ' + plateNo
+        status: 'success',
+        message: 'review successfully posted for carplate ' + plateNo
     });
-
 }
 
 function validatePayload(data) {
-    return POST_REVIEW_PAYLOAD.every(item => data.hasOwnProperty(item));
+    return POST_REVIEW_PAYLOAD.every((item) => data.hasOwnProperty(item));
 }
 
 module.exports = {
