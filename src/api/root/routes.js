@@ -10,10 +10,10 @@ let router = express.Router();
 
 router.get('/', function (req, res) {
     res.status(200).json({
-        'app': config.name,
-        'version': config.version,
-        'status': 'OK',
-        'environment': config.env
+        app: config.name,
+        version: config.version,
+        status: 'OK',
+        environment: config.env
     });
 });
 

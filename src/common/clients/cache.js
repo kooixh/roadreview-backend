@@ -17,7 +17,6 @@ let redisDB = redis.createClient({
 
 let isInitialized = false;
 
-
 /**
  *
  * Start up the cache and log it
@@ -28,9 +27,8 @@ function init() {
     if (!isInitialized) {
         redisDB.on('connect', () => {
             console.log(`connected to redis : ` + config.redis.url);
-
         });
-        redisDB.on('error', err => {
+        redisDB.on('error', (err) => {
             console.log(`Error: ${err}`);
             return process.exit(7);
         });
